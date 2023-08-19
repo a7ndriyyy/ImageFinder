@@ -42,3 +42,22 @@ function renderImageList(images) {
   }
 
 searchForm.addEventListener('submit', onSubmitSearchForm);
+
+async function onSubmitSearchFormt(e) {
+ e.preventDefault();
+ searchQuery = e.currentTarget.searchQuery.value;
+  pageNumber = 1;
+
+  if (searchQuery === '') {
+    return;
+  }
+
+  const response = await fetchImages(searchQuery, pageNumber);
+  currentHits = response.hits.length;
+
+  if (response.totalHits > 40) {
+    loadMoreBtn.style.display = 'block';
+  } else {
+    loadMoreBtn.style.display = 'none';
+  }
+}
