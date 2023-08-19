@@ -4,13 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homework 11</title>
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <select class="breed-select"></select>
-    <p class="loader">Loading data, please wait...</p>
-    <p class="error">Oops! Something went wrong! Try reloading the page!</p>
-    <div class="cat-info"></div>
-
+    <form  id="search-form">
+      <input class="search-form__input"
+        type="text"
+        name="searchQuery"
+        autocomplete="off"
+        placeholder="Search images..."
+      />
+      <button class="search-form__button" type="submit">Search</button>
+    </form>
+    <div class="container">
+      <div class="gallery"></div>
+      <button type="button" class="load-more">Load more</button>
+      <p class="end-text">
+        We're sorry, but you've reached the end of search results.
+      </p>
+    </div>
     <script src="index.js" type="module"></script>
   </body>
 </html>
