@@ -64,6 +64,16 @@ async function onSubmitSearchForm(e) {
     }
   
     try {
+      if (response.total === 0) {
+        message('Please write correct data!');
+        return;
+      }
+      currentHits += response.hits.length;
+      if (currentHits === response.totalHits || currentHits < 40) {
+        refs.endText.textContent =
+          'Were sorry, but you ve reached the end of search results.';
+        return;
+      }
       if (response.totalHits > 0) {
         Notiflix.Notify.success(`Hooray! We found ${response.totalHits} images.`);
         gallery.innerHTML = '';
