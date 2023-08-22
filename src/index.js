@@ -16,6 +16,7 @@ let searchQuery = '';
 loadMoreBtn.style.display = 'none';
 endText.style.display = 'none';
 
+
 function renderImageList(images) {
     console.log(images, 'images');
     const markup = images
@@ -47,13 +48,18 @@ searchForm.addEventListener('submit', onSubmitSearchForm);
 
 async function onSubmitSearchForm(e) {
     e.preventDefault();
-    searchQuery = e.currentTarget.searchQuery.value;
+    searchQuery = e.currentTarget.searchQuery.value.trim();
     pageNumber = 1;
   
-    if (searchQuery === '') {
+    // if (searchQuery === '') {
+    //   return;
+    // }
+  
+    if (!searchQuery) {
+      message('Please write correct data!');
       return;
     }
-  
+
     const response = await fetchImages(searchQuery, pageNumber);
     currentHits = response.hits.length;
   
@@ -102,7 +108,7 @@ async function onSubmitSearchForm(e) {
   
     if (currentHits === response.totalHits) {
       loadMoreBtn.style.display = 'none';
-      endText.style.display = 'block'
+      endText.style.display = 'block';
     }
   }
   
