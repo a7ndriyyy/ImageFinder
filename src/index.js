@@ -52,9 +52,6 @@ async function onSubmitSearchForm(e) {
     searchQuery = e.currentTarget.searchQuery.value.trim();
     pageNumber = 1;
   
-    // if (searchQuery === '') {
-    //   return;
-    // }
   
     if (!searchQuery) {
       // message('Please write correct data!');
@@ -101,23 +98,16 @@ async function onSubmitSearchForm(e) {
   loadMoreBtn.addEventListener('click', onClickLoadMoreBtn);
   
   async function onClickLoadMoreBtn() {
-    pageNumber ++;
+    pageNumber += 1;
     const response = await fetchImages(searchQuery, pageNumber);
     renderImageList(response.hits);
     gallerySimpleLightbox.refresh();
     currentHits += response.hits.length;
   
     if (currentHits === response.totalHits) {
-      loadMoreBtn.style.display = 'none';
-      endText.style.display = 'block';
+      loadMoreBtn.style.display = 'block';
+      endText.style.display = 'none';
     }
-
-    // const totalPages = Math.ceil(response.totalHits / perPage);
-
-    // if (pageNumber >= totalPages) {
-    //   loadMoreBtn.classList.add('is-hidden');
-    //   onClickLoadMoreBtn();
-    // }
   }
   
   
