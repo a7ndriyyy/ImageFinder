@@ -68,7 +68,7 @@ async function onSubmitSearchForm(e) {
     } else {
       loadMoreBtn.style.display = 'block';
     }
-    
+
     try {
       if (response.total === 0) {
         // message('Please write correct data!');
@@ -80,6 +80,8 @@ async function onSubmitSearchForm(e) {
       if (currentHits === response.totalHits || currentHits < 40) {
         refs.endText.textContent =
           'Were sorry, but you ve reached the end of search results.';
+          loadMoreBtn.style.display = 'none';
+          endText.style.display = 'block';
         return;
       }
       if (response.totalHits > 0) {
@@ -109,8 +111,8 @@ async function onSubmitSearchForm(e) {
     currentHits += response.hits.length;
   
     if (currentHits === response.totalHits) {
-      loadMoreBtn.style.display = 'block';
-      endText.style.display = 'none';
+      loadMoreBtn.style.display = 'none';
+      endText.style.display = 'block';
     } 
   }
   
