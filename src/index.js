@@ -12,7 +12,7 @@ let gallerySimpleLightbox = new SimpleLightbox('.gallery a');
 let pageNumber = 1;
 let currentHits = 0;
 let searchQuery = '';
-let perPage = 40;
+
 
 loadMoreBtn.style.display = 'none';
 endText.style.display = 'none';
@@ -64,7 +64,7 @@ async function onSubmitSearchForm(e) {
     const response = await fetchImages(searchQuery, pageNumber);
     currentHits = response.hits.length;
   
-    if (response.totalHits > 40) {
+    if (pageNumber >=Math.ceil(response.totalHits / 40)) {
       loadMoreBtn.style.display = 'block';
     } else {
       loadMoreBtn.style.display = 'none';
@@ -101,23 +101,23 @@ async function onSubmitSearchForm(e) {
   loadMoreBtn.addEventListener('click', onClickLoadMoreBtn);
   
   async function onClickLoadMoreBtn() {
-    pageNumber ++;
+    pageNumber += 1;
     const response = await fetchImages(searchQuery, pageNumber);
     renderImageList(response.hits);
     gallerySimpleLightbox.refresh();
     currentHits += response.hits.length;
   
-    // if (currentHits === response.totalHits) {
-    //   loadMoreBtn.style.display = 'none';
-    //   endText.style.display = 'block';
-    // }
-
-    const totalPages = Math.ceil(response.totalHits / perPage);
-
-    if (pageNumber > totalPages) {
-      loadMoreBtn.classList.add('is-hidden');
-      onClickLoadMoreBtn();
+    if (currentHits === response.totalHits) {
+      loadMoreBtn.style.display = 'none';
+      endText.style.display = 'block';
     }
+
+    // const totalPages = Math.ceil(response.totalHits / perPage);
+
+    // if (pageNumber >= totalPages) {
+    //   loadMoreBtn.classList.add('is-hidden');
+    //   onClickLoadMoreBtn();
+    // }
   }
   
   
