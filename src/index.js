@@ -56,8 +56,8 @@ async function onSubmitSearchForm(e) {
     // }
   
     if (!searchQuery) {
-      message('Please write correct data!');
-      return;
+      // message('Please write correct data!');
+      return message('Please write correct data!');
     }
 
     const response = await fetchImages(searchQuery, pageNumber);
@@ -71,8 +71,8 @@ async function onSubmitSearchForm(e) {
   
     try {
       if (response.total === 0) {
-        message('Please write correct data!');
-        return;
+        // message('Please write correct data!');
+        return message('Please write correct data!');
       }
       currentHits += response.hits.length;
       if (currentHits === response.totalHits || currentHits < 40) {
