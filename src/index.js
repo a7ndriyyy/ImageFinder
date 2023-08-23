@@ -64,7 +64,7 @@ async function onSubmitSearchForm(e) {
     const response = await fetchImages(searchQuery, pageNumber);
     currentHits = response.hits.length;
   
-    if (pageNumber >=Math.ceil(response.totalHits / 40)) {
+    if (pageNumber >= Math.ceil(response.totalHits / 40)) {
       loadMoreBtn.style.display = 'block';
     } else {
       loadMoreBtn.style.display = 'none';
@@ -101,7 +101,7 @@ async function onSubmitSearchForm(e) {
   loadMoreBtn.addEventListener('click', onClickLoadMoreBtn);
   
   async function onClickLoadMoreBtn() {
-    pageNumber += 1;
+    pageNumber ++;
     const response = await fetchImages(searchQuery, pageNumber);
     renderImageList(response.hits);
     gallerySimpleLightbox.refresh();
