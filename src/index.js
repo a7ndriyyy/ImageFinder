@@ -55,9 +55,11 @@ async function onSubmitSearchForm(e) {
   
     if (!searchQuery) {
       // message('Please write correct data!');
-      return message('Please write correct data!');
+      // return message('Please write correct data!');
+      Notiflix.Notify.failure('Please write correct data!');
+      return;
     }
-
+   
     const response = await fetchImages(searchQuery, pageNumber);
     currentHits = response.hits.length;
   
@@ -66,11 +68,13 @@ async function onSubmitSearchForm(e) {
     } else {
       loadMoreBtn.style.display = 'block';
     }
-  
+    
     try {
       if (response.total === 0) {
         // message('Please write correct data!');
-        return message('Please write correct data!');
+        // return message('Please write correct data!');
+        Notiflix.Notify.failure('Please write correct data!');
+        return;
       }
       currentHits += response.hits.length;
       if (currentHits === response.totalHits || currentHits < 40) {
@@ -98,7 +102,7 @@ async function onSubmitSearchForm(e) {
   loadMoreBtn.addEventListener('click', onClickLoadMoreBtn);
   
   async function onClickLoadMoreBtn() {
-    pageNumber += 1;
+    pageNumber ++;
     const response = await fetchImages(searchQuery, pageNumber);
     renderImageList(response.hits);
     gallerySimpleLightbox.refresh();
@@ -107,7 +111,7 @@ async function onSubmitSearchForm(e) {
     if (currentHits === response.totalHits) {
       loadMoreBtn.style.display = 'block';
       endText.style.display = 'none';
-    }
+    } 
   }
   
   
