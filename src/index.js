@@ -78,7 +78,7 @@ async function onSubmitSearchForm(e) {
       }
       currentHits += response.hits.length;
       if (currentHits === response.totalHits || currentHits < 40) {
-        refs.endText.textContent =
+       endText.textContent =
           'Were sorry, but you ve reached the end of search results.';
           loadMoreBtn.style.display = 'none';
           endText.style.display = 'block';
@@ -114,6 +114,12 @@ async function onSubmitSearchForm(e) {
       loadMoreBtn.style.display = 'none';
       endText.style.display = 'block';
     } 
+
+    if (pageNumber >= Math.ceil(response.totalHits / 40)) {
+      loadMoreBtn.style.display = 'none';
+    } else {
+      loadMoreBtn.style.display = 'block';
+    }
   }
   
   
